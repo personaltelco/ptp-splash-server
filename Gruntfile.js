@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                     './src/bower_components/async/lib/async.js',
                     './src/*.js'
                 ],
-                dest: './htdocs/js/ws-<%= pkg.name %>.min.js'
+                dest: './htdocs/js/<%= pkg.name %>.min.js'
 			}
         },
         exec: {
