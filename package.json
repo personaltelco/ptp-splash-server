@@ -1,0 +1,27 @@
+{
+  "name": "ptp-splash-static",
+  "version": "0.0.1",
+  "description": "personal telco project splash page static resources",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "grunt"
+  },
+  "keywords": [
+    "splash",
+    "page",
+    "personal",
+    "telco"
+  ],
+  "author": "Benjamin Foote",
+  "license": "GPL2",
+  "devDependencies": {
+    "grunt-nodemon": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt": "~0.4.2",
+    "grunt-exec": "~0.4.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-jshint": "~0.8.0",
+    "dustjs-linkedin": "~2.3.3"
+  }
+}

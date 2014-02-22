@@ -1,0 +1,25 @@
+<div class="tweet row" id="{id_str}">
+    <div class="col-md-2">
+	<a href="https://twitter.com/{user.screen_name}">
+		<img class="media-object img-rounded Ticon" src="{user.profile_image_url_https}" alt="{user.screen_name}" onerror="this.onerror=null;this.src=baseurl+'images/twitter-default-icon.jpg';"/>
+	</a>
+    </div>
+	<div class="col-md-10">
+		<h4 class="name">
+			<a href="https://twitter.com/{user.screen_name}">{user.name}</a> 
+			<small><span class="ago" data-date="{created_at}">&nbsp</span></small>
+		</h4>
+		<a href="https://twitter.com/{user.screen_name}">@{user.screen_name}</a>  
+		{#user.url}
+			<span class="Turl">
+				<a href="{user.url}">{user.url}</a>
+			</span>
+		{/user.url}
+		<div class="Ttext">
+			<a href="https://twitter.com/{user.screen_name}/status/{id_str}">{text}</a>
+		</div>
+	</div>
+
+</div>
+
+

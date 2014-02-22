@@ -1,0 +1,31 @@
+
+
+.rss h4 {
+    margin-bottom: 0px;
+}
+
+.tweet {
+    margin-bottom: 10px;
+}
+
+.tweet h4 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.Turl a {
+	color: grey;
+	font-size: 10px;
+}
+
+.Ticon {
+	padding-right: 5px;
+}
+
+.Ttext a, .name a {
+	color: black
+}
+
+#tweets .name {
+	margin-bottom: 0;
+}
