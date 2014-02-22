@@ -11,6 +11,8 @@ The static files (mostly javascript) are built from the src directory using node
 
 ## install
 
+depends on nodejs
+
 first, clone the repo
 
 ````bash
@@ -21,19 +23,19 @@ then run
     
 ````bash
     npm install
-    grunt 
 ````
 
 ## editing the splash page content that's loaded from the server
 
 If you're looking to make edits to some of the splashpage sections
-that get loaded you'll want to edit the dustjs (handlebars style)
+that get loaded you'll want to edit the [dustjs](http://linkedin.github.io/dustjs/) (handlebars style)
 templates in ./src/dustjs and then run
 
 ````bash
-    grunt 
+    make
 ````
-Which will call 'dustc' (dust compiler) to turn those templates into
+Which will call grunt, a nodejs build tool.  grunt is configured by Gruntfile.js
+to exec build commnands including 'dustc' (dust compiler) to turn those templates into
 javascript which go into the ./src directory.  Uglify is then called 
 to combine and minify all *.js in the ./src directory and a few dependencies
 in src/bower_components into

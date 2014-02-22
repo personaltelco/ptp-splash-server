@@ -51,10 +51,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-nodemon');
       
     // Default task(s).
-    grunt.registerTask('default', ['exec','uglify']);
     grunt.registerTask('dust', ['exec:dust_news', 'exec:dust_tweet', 'exec:dust_rss', 'exec:dust_about']);
+    grunt.registerTask('default', ['dust','uglify']);
 
 };
