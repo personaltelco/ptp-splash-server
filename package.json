@@ -1,5 +1,5 @@
 {
-  "name": "ptp-splash-static",
+  "name": "ptp-splash-server",
   "version": "0.0.1",
   "description": "personal telco project splash page static resources",
   "main": "server.js",

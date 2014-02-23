@@ -1,10 +1,27 @@
 
+// pageConf is set in splash.html in ptp-splash-page repo
+// https://github.com/personaltelco/ptp-splash-page
+// it is meant to be the place for handoff of information to this js
+var nodeName = pageConf.nodeName;  
 
-var apibase = baseurl + 'api/v0';
+// these must correspond to the server for ptp-api
+// https://github.com/personaltelco/ptp-api
+var apibase = 'http://api.personaltelco.net';
+var apibase = apibase + '/api/v0';
+
+$(document).ready(function() {
+    async.parallel([internetWorks,
+                    loadDonors,
+                    loadAbout,
+                    loadMailinglist,
+                    loadNews
+                   ], 
+                   finished);
+});
 
 function internetWorks(cb) {
 	console.log('internet works');
-	$( "#works" ).text("Dynamic content successfully loaded from " + baseurl);	
+	$( "#works" ).text("Dynamic content successfully loaded from " + apibase);	
 	// tempting to load some overall network stats
 	// number of nodes active
 	// number of connected users
@@ -162,15 +179,5 @@ function prettyDate(time) {
     var when = new Date(time);
     return when.toDateString();
 }
-
-$(document).ready(function() {
-    async.parallel([internetWorks,
-                    loadDonors,
-                    loadAbout,
-                    loadMailinglist,
-                    loadNews
-                   ], 
-                   finished);
-});
 
 
