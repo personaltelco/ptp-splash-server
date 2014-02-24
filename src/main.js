@@ -1,4 +1,13 @@
 
+
+// development convenience to be able to pass
+// ?nodeName=PotatoChampion
+// for example in order to test how it looks with different nodes
+var params = getParams();
+if (params.nodeName) {
+    pageConf.nodeName = params.nodeName;
+}
+
 // pageConf is set in splash.html in ptp-splash-page repo
 // https://github.com/personaltelco/ptp-splash-page
 // it is meant to be the place for handoff of information to this js
@@ -179,5 +188,23 @@ function prettyDate(time) {
     var when = new Date(time);
     return when.toDateString();
 }
+
+//http://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+function getParams() {
+    var prmstr = window.location.search.substr(1);
+    return prmstr != null && prmstr != "" ? toAssocArray(prmstr) : {};
+}
+
+function toAssocArray( prmstr ) {
+  var params = {};
+  var prmarr = prmstr.split("&");
+  for ( var i = 0; i < prmarr.length; i++) {
+      var tmparr = prmarr[i].split("=");
+      params[tmparr[0]] = tmparr[1];
+  }
+  return params;
+}
+
+
 
 
