@@ -10,8 +10,8 @@ module.exports = function(grunt) {
 			},
 			build: {
 				src: [
-                    './src/bower_components/dustjs/dist/dust-full-0.3.0.js',
-                    './src/bower_components/async/lib/async.js',
+                    './node_modules/dustjs-linkedin/dist/dust-full.min.js',
+                    './node_modules/async/lib/async.js',
                     './src/*.js'
                 ],
                 dest: './htdocs/js/<%= pkg.name %>.min.js'

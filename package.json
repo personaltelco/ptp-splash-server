@@ -23,6 +23,7 @@
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-jshint": "~0.8.0",
     "dustjs-linkedin": "~2.3.3",
+    "async": "~0.2.10",
     "grunt-cli": "~0.1.13"
   }
 }
