@@ -60,8 +60,8 @@ function loadDonors(cb) {
 function loadNews(done) {
 	console.log('loading news');
 	async.parallel([
-        function(cb){getAndRender(apibase + '/tweets/ptp', 'tweet', cb);},
-        function(cb){getAndRender(apibase + '/tweets/' + nodeName, 'tweet', cb);},
+        function(cb){getAndRender(apibase + '/twitter/ptp', 'tweet', cb);},
+        function(cb){getAndRender(apibase + '/twitter/' + nodeName, 'tweet', cb);},
         function(cb){getAndRender(apibase + '/rss/' + nodeName, 'rss', cb);}
     ], 
     function(err, res) {
