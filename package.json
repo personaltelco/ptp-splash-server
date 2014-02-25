@@ -24,6 +24,7 @@
     "grunt-contrib-jshint": "~0.8.0",
     "dustjs-linkedin": "~2.3.3",
     "async": "~0.2.10",
-    "grunt-cli": "~0.1.13"
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-cssmin": "~0.8.0"
   }
 }

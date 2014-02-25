@@ -17,6 +17,18 @@ module.exports = function(grunt) {
                 dest: './htdocs/js/<%= pkg.name %>.min.js'
 			}
         },
+        cssmin : {
+            add_banner : {
+                options : {
+                    report: "gzip",
+                    banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd hh:MM") %> */\n',
+                },
+                files : {
+                    'htdocs/css/<%= pkg.name %>.min.css' : [
+                            'src/css/ptp-splash-server.css' ]
+                }
+            }
+        },
         exec: {
             dust_news: {
                 cmd: "./node_modules/.bin/dustc --name=news ./src/dustjs/news.html ./src/_dust_news.js"
@@ -49,11 +61,11 @@ module.exports = function(grunt) {
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-watch');
-      
     // Default task(s).
     grunt.registerTask('dust', ['exec:dust_news', 'exec:dust_tweet', 'exec:dust_rss', 'exec:dust_about']);
-    grunt.registerTask('default', ['dust','uglify']);
+    grunt.registerTask('default', ['dust','uglify','cssmin']);
 
 };
