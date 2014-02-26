@@ -1,1 +1,0 @@
-(function(){dust.register("about_nodes",body_0);function body_0(chk,ctx){return chk.write("<h2>").reference(ctx._get(false,["n","nodename"]),ctx,"h").write("</h2><img src=\"").reference(ctx._get(false, ["base"]),ctx,"h").reference(ctx._get(false,["n","logo"]),ctx,"h").write("\"/>");}return body_0;})();
