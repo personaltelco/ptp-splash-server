@@ -1,5 +1,20 @@
 
 
+
+#aboutServer {
+}
+
+#aboutNodes {
+    margin-top: 150px;
+}
+
+#aboutNodes * {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
 .rss h4 {
     margin-bottom: 0px;
 }

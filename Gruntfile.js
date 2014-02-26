@@ -39,33 +39,37 @@ module.exports = function(grunt) {
             dust_rss: {
                 cmd: "./node_modules/.bin/dustc --name=rss ./src/dustjs/rss.html ./src/_dust_rss.js"
             },
-            dust_about: {
-                cmd: "./node_modules/.bin/dustc --name=about ./src/dustjs/about.html ./src/_dust_about.js"
+            dust_about_video: {
+                cmd: "./node_modules/.bin/dustc --name=about_video ./src/dustjs/about_video.html ./src/_dust_about_video.js"
+            },
+            dust_about_nodes: {
+                cmd: "./node_modules/.bin/dustc --name=about_nodes ./src/dustjs/about_nodes.html ./src/_dust_about_nodes.js"
             },
         },
         watch: {
             scripts: {
                 files: ['./src/*.js', 
                         './src/dustjs/*.html', 
-                        './htdocs/css/*.css', 
+                        './src/css/*.css', 
                         './htdocs/*.html'
                 ],
-                tasks: ['dust','uglify'],
+                tasks: ['dust','uglify','cssmin'],
                 options: {
                     spawn: false,
-                    livereload: true,
+                    livereload: false,
                 },
             },
         },
 	});
 
-    // Load the plugin that provides the "uglify" task.
+    // Load the plugin that provides the task
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    // Default task(s).
-    grunt.registerTask('dust', ['exec:dust_news', 'exec:dust_tweet', 'exec:dust_rss', 'exec:dust_about']);
+
+    grunt.registerTask('dust', ['exec:dust_news', 'exec:dust_tweet', 'exec:dust_rss', 'exec:dust_about_video', 'exec:dust_about_nodes']);
+    // Default task(s) that run if you just type 'grunt'
     grunt.registerTask('default', ['dust','uglify','cssmin']);
 
 };
