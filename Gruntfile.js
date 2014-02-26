@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 				src: [
                     './node_modules/dustjs-linkedin/dist/dust-full.min.js',
                     './node_modules/async/lib/async.js',
+                    './src/dustjs/compiled/*.js',
                     './src/*.js'
                 ],
                 dest: './htdocs/js/<%= pkg.name %>.min.js'
@@ -31,19 +32,19 @@ module.exports = function(grunt) {
         },
         exec: {
             dust_news: {
-                cmd: "./node_modules/.bin/dustc --name=news ./src/dustjs/news.html ./src/_dust_news.js"
+                cmd: "./node_modules/.bin/dustc --name=news ./src/dustjs/news.html ./src/dustjs/compiled/_dust_news.js"
             },
             dust_tweet: {
-                cmd: "./node_modules/.bin/dustc --name=tweet ./src/dustjs/tweet.html ./src/_dust_tweet.js"
+                cmd: "./node_modules/.bin/dustc --name=tweet ./src/dustjs/tweet.html ./src/dustjs/compiled/_dust_tweet.js"
             },
             dust_rss: {
-                cmd: "./node_modules/.bin/dustc --name=rss ./src/dustjs/rss.html ./src/_dust_rss.js"
+                cmd: "./node_modules/.bin/dustc --name=rss ./src/dustjs/rss.html ./src/dustjs/compiled/_dust_rss.js"
             },
             dust_about_video: {
-                cmd: "./node_modules/.bin/dustc --name=about_video ./src/dustjs/about_video.html ./src/_dust_about_video.js"
+                cmd: "./node_modules/.bin/dustc --name=about_video ./src/dustjs/about_video.html ./src/dustjs/compiled/_dust_about_video.js"
             },
             dust_about_nodes: {
-                cmd: "./node_modules/.bin/dustc --name=about_nodes ./src/dustjs/about_nodes.html ./src/_dust_about_nodes.js"
+                cmd: "./node_modules/.bin/dustc --name=about_nodes ./src/dustjs/about_nodes.html ./src/dustjs/compiled/_dust_about_nodes.js"
             },
         },
         watch: {

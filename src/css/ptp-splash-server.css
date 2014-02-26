@@ -1,7 +1,7 @@
 
 
-
 #aboutServer {
+
 }
 
 #aboutNodes {
@@ -10,10 +10,21 @@
 
 #aboutNodes * {
     text-align: center;
-    width: 100%;
     margin: 0 auto;
 }
 
+#nodeLogo {
+    height: 223px;
+    width: 223px;
+}
+
+#nodeLogo img {
+
+}
+
+#nodeHeader {
+    margin-bottom: 40px;
+}
 
 .rss h4 {
     margin-bottom: 0px;
