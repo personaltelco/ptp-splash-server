@@ -7,3 +7,7 @@ var nodeName = pageConf.nodeName;
 // https://github.com/personaltelco/ptp-api
 var apiserver = 'http://api.personaltelco.net';
 var apibase = apiserver + '/api/v0';
+
+// the place where the images are stored
+// must be whole url
+var imgbase = "http://static.personaltelco.net/images/nodes/";

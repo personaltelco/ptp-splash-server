@@ -78,7 +78,7 @@ function loadAboutNodes(done) {
                 var nodeName = Object.keys(node)[0];
                 var obj = {
                     n : node[nodeName],
-                    base : "http://static.personaltelco.net/images/nodes/"
+                    base : imgbase
                 };
                 dust.render("about_nodes", obj, function(err, rendered) {
                     // console.log(url, template);
