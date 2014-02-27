@@ -1,9 +1,9 @@
-ptp-splash-server
-=================
+ptp-splash-server aka static server
+===================================
 
-Benjamin Foote
-2014-02-21
-ben@bnf.net
+Benjamin Foote  
+2014-02-21  
+ben@bnf.net  
 
 The Splash page (ptp-splash-page) is backed by some static files from a server
 
@@ -25,7 +25,22 @@ then run
     npm install
 ````
 
-## editing the splash page content that's loaded from the server
+## building the js and css that gets delivered to the browser
+
+before you do anything
+
+````bash
+    cp ./src/ptp-splash-server-config.js.example ./src/ptp-splash-server-config.js
+````
+and then edit that file
+
+then call
+
+````bash
+    make
+````
+
+## editing the js and dynamin html that gets delivered to the browser
 
 If you're looking to make edits to some of the splashpage sections
 that get loaded you'll want to edit the [dustjs](http://linkedin.github.io/dustjs/) (handlebars style)
@@ -34,12 +49,15 @@ templates in ./src/dustjs and then run
 ````bash
     make
 ````
+
 Which will call grunt, a nodejs build tool.  grunt is configured by Gruntfile.js
 to exec build commnands including 'dustc' (dust compiler) to turn those templates into
 javascript.  Uglify is then called to combine and minify all the 
 javascript (as configured in Gruntfile.js) and spits out
  
-    ./htdocs/js/ws-ptp-splash-static.min.js
+    ./htdocs/js/ptp-splash-server.min.js
+    ./htdocs/css/ptp-splash-server.min.css
+
 
 which is what gets called by the browser.
 
