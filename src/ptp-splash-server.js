@@ -1,4 +1,3 @@
-
 // development convenience to be able to pass
 // ?nodeName=PotatoChampion
 // for example in order to test how it looks with different nodes
@@ -7,20 +6,15 @@ if (params.nodeName) {
     pageConf.nodeName = params.nodeName;
 }
 
-// pageConf is set in splash.html in ptp-splash-page repo
-// https://github.com/personaltelco/ptp-splash-page
-// it is meant to be the place for handoff of information to this js
-var nodeName = pageConf.nodeName;
-
-// these must correspond to the server for ptp-api
-// https://github.com/personaltelco/ptp-api
-var apiserver = 'http://api.personaltelco.net';
-var apibase = apiserver + '/api/v0';
-
 $(document).ready(
         function() {
-            async.parallel([ internetWorks, loadDonors, loadAboutVideo,
-                    loadAboutNodes, loadMailinglist, loadNews ], finished);
+            async.parallel([ internetWorks, 
+                             loadDonors, 
+                             loadAboutVideo,
+                             loadAboutNodes, 
+                             loadMailinglist, 
+                             loadNews ], 
+                             finished);
         });
 
 function internetWorks(cb) {
@@ -134,36 +128,54 @@ function loadNews(done) {
         }
         dust.render("news", {
             nodeName : nodeName
-        }, function(err1, out) {
-            if (err)
-                throw err;
-            $(out).insertAfter("#newsFromServer");
+        }, function(err1, newsRender) {
+            if (err1)
+                throw err1;
+            
+            $(newsRender).insertAfter("#newsFromServer");
 
-            var success = 0;
-            if (res[0]) {
-                success = success + 1;
-                $(res[0]).appendTo("#ptptweets");
+            var targets = ['ptptweets','nodetweets','noderss'];
+            var active = [];
+            for (var i = 0; i < targets.length; i++) {
+                if (res[i]) {
+                    active.push(targets[i]);
+                    addNewsContent(res[i],targets[i]);
+                }
             }
-            $(res[1]).appendTo("#nodetweets");
-            $(res[2]).appendTo("#noderss");
+            // bootstrap grid is based on 12 boxes
+            var colClass = 'col-md-' + (12 / active.length);
+            for (var i = 0; i < active.length; i++) {
+                console.log('adding ' + colClass + ' to ' + active[i]);
+                $('#' + active[i]).addClass(colClass)
+            }
             addNav('news', 'News');
             done();
         });
     });
 }
 
+function addNewsContent(content, target) {
+    var c = $('<div id="'+ target +'"></div>').html(content);
+    $("#news").append(c);
+}
+
+
 function getAndRender(url, template, cb) {
     $.getJSON(url, function(res) {
-        async.map(res.data, function(e, next) {
-            dust.render(template, e, function(err, rendered) {
-                console.log(url, template);
-                next(err, rendered);
+        if (!res || res.type === 'error' ){
+            return cb("not found", null);
+        } else {
+            async.map(res.data, function(e, next) {
+                dust.render(template, e, function(err, rendered) {
+                    console.log(url, template);
+                    next(err, rendered);
+                });
+            }, function(err, ret) {
+                if (err)
+                    throw err;
+                cb(err, ret.join(''));
             });
-        }, function(err, ret) {
-            if (err)
-                throw err;
-            cb(err, ret.join(''));
-        });
+        }
     });
 }
 

@@ -36,11 +36,10 @@ templates in ./src/dustjs and then run
 ````
 Which will call grunt, a nodejs build tool.  grunt is configured by Gruntfile.js
 to exec build commnands including 'dustc' (dust compiler) to turn those templates into
-javascript which go into the ./src directory.  Uglify is then called 
-to combine and minify all *.js in the ./src directory and a few dependencies
-in src/bower_components into
+javascript.  Uglify is then called to combine and minify all the 
+javascript (as configured in Gruntfile.js) and spits out
  
     ./htdocs/js/ws-ptp-splash-static.min.js
 
-which is what gets sent to the browser.
+which is what gets called by the browser.
 
