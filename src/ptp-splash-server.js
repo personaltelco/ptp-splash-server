@@ -9,6 +9,9 @@ if (params.nodeName) {
 $(document).ready(
         function() {
 
+//            $('.PTP_LOGO').error(function() {
+//                $('.PTP_LOGO').attr('src', imgbase + res.data.logo);
+//            });
             // change out all the PTP vars for demo
             if (params.nodeName) {
                 console.log('changing out the node info');
@@ -37,7 +40,7 @@ $(document).ready(
 function internetWorks(cb) {
     console.log('internet works');
     $("#works").text("Dynamic content successfully loaded from " + apiserver);
-
+    $("#works").removeClass('text-danger');
     $("#statusSidebarWords").text("connected");
     $("#statusSidebarWords").removeClass('text-danger')
             .addClass('text-success');
@@ -69,12 +72,12 @@ function loadMailinglist(cb) {
 function loadDonors(cb) {
     $.getJSON(apibase + '/donors', function(res) {
         $('#donors').append(
-                '<h2 class="featurette-heading">Thank You Donors!!!</h2>');
+                '<h2 class="featurette-heading">Thank You to Our Donors</h2>');
         res.data
                 .forEach(function(e) {
                     console.log('loading donors', e);
                     $('#donors').append(
-                            '<strong>' + e + '</strong>&nbsp;&nbsp;&nbsp;');
+                            '<strong class="donorName">' + e + '</strong>&nbsp;&nbsp;&nbsp;');
                 });
         cb();
     });
@@ -83,20 +86,19 @@ function loadDonors(cb) {
 function loadAboutNodes(done) {
     console.log('about nodes');
     $.getJSON(apibase + '/nodes', function(res) {
-
         // get all the nodes that have logos
         async.filter(res.data, function(n, cb) {
-            var nodeName = Object.keys(n)[0];
-            console.log('logo', n[nodeName].logo);
-            cb((n && n[nodeName].logo));
+            var nn = Object.keys(n)[0]; // the key is the nodename
+            console.log('logo', n[nn].logo);
+            cb((n && n[nn].logo));
         }, function(list) {
             // and then render them
             async.map(list, function(nodeinfo, next) {
-                var nodeName = Object.keys(nodeinfo)[0];
+                var nname = Object.keys(nodeinfo)[0];
                 var obj = {
-                    n : nodeinfo[nodeName],
+                    n : nodeinfo[nname],
                     base : imgbase,
-                    nodename: nodeName
+                    nodename: nname
                 };
                 dust.render("about_nodes", obj, function(err, rendered) {
                     // console.log(url, template);
@@ -145,7 +147,7 @@ function loadNews(done) {
             return;
         }
         dust.render("news", {
-            nodeName : nodeName
+            nodeName : pageConf.nodeName
         }, function(err1, newsRender) {
             if (err1)
                 throw err1;
@@ -161,7 +163,9 @@ function loadNews(done) {
                 }
             }
             // bootstrap grid is based on 12 boxes
-            var colClass = 'col-md-' + (12 / active.length);
+            // var colClass = 'col-md-' + (12 / active.length);
+            // turns out that looks like crap
+            colClass = 'col-md-4';
             for (var i = 0; i < active.length; i++) {
                 console.log('adding ' + colClass + ' to ' + active[i]);
                 $('#' + active[i]).addClass(colClass)
@@ -181,6 +185,7 @@ function addNewsContent(content, target) {
 function getAndRender(url, template, cb) {
     $.getJSON(url, function(res) {
         if (!res || res.type === 'error' ){
+            console.log('not found: ', url);
             return cb("not found", null);
         } else {
             async.map(res.data, function(e, next) {
