@@ -186,7 +186,7 @@ function getAndRender(url, template, cb) {
     $.getJSON(url, function(res) {
         if (!res || res.type === 'error' ){
             console.log('not found: ', url);
-            return cb("not found", null);
+            return cb(null, null);  // don't pass an error back because it kills async.parallel
         } else {
             async.map(res.data, function(e, next) {
                 dust.render(template, e, function(err, rendered) {
