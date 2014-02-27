@@ -1,5 +1,6 @@
 
 
+
 #aboutServer {
 
 }
@@ -24,6 +25,11 @@
 
 #nodeHeader {
     margin-bottom: 40px;
+}
+
+#noderss {
+    height: 40em;
+    overflow: auto;
 }
 
 .rss h4 {
