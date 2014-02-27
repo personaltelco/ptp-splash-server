@@ -8,6 +8,23 @@ if (params.nodeName) {
 
 $(document).ready(
         function() {
+
+            // change out all the PTP vars for demo
+            if (params.nodeName) {
+                console.log('changing out the node info');
+                $.getJSON(apibase + '/nodes/' + pageConf.nodeName , function(res) {
+                    var keys = Object.keys(res.data);
+                    $('.PTP_LOGO').attr('src', imgbase + res.data.logo);
+                    for (var i = 0; i < keys.length; i++) {
+                        if (keys[i] !== 'logo') {
+                            var cls = "PTP_" + keys[i].toUpperCase();
+                            console.log('replacing',cls,'with',res.data[keys[i]]);
+                            $('.' + cls).text(res.data[keys[i]]);
+                        }
+                    }
+                });
+            }
+        
             async.parallel([ internetWorks, 
                              loadDonors, 
                              loadAboutVideo,
@@ -74,11 +91,12 @@ function loadAboutNodes(done) {
             cb((n && n[nodeName].logo));
         }, function(list) {
             // and then render them
-            async.map(list, function(node, next) {
-                var nodeName = Object.keys(node)[0];
+            async.map(list, function(nodeinfo, next) {
+                var nodeName = Object.keys(nodeinfo)[0];
                 var obj = {
-                    n : node[nodeName],
-                    base : imgbase
+                    n : nodeinfo[nodeName],
+                    base : imgbase,
+                    nodename: nodeName
                 };
                 dust.render("about_nodes", obj, function(err, rendered) {
                     // console.log(url, template);
