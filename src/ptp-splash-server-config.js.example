@@ -1,0 +1,9 @@
+// pageConf is set in splash.html in ptp-splash-page repo
+// https://github.com/personaltelco/ptp-splash-page
+// it is meant to be the place for handoff of information to this js
+var nodeName = pageConf.nodeName;
+
+// these must correspond to the server for ptp-api
+// https://github.com/personaltelco/ptp-api
+var apiserver = 'http://api.personaltelco.net';
+var apibase = apiserver + '/api/v0';
