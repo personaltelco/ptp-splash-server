@@ -137,9 +137,9 @@ function loadNews(done) {
     async.parallel([ function(cb) {
         getAndRender(apibase + '/twitter/ptp', 'tweet', cb);
     }, function(cb) {
-        getAndRender(apibase + '/twitter/' + nodeName, 'tweet', cb);
+        getAndRender(apibase + '/twitter/' + pageConf.nodeName, 'tweet', cb);
     }, function(cb) {
-        getAndRender(apibase + '/rss/' + nodeName, 'rss', cb);
+        getAndRender(apibase + '/rss/' + pageConf.nodeName, 'rss', cb);
     } ], function(err, res) {
         if (!res[0] && !res[1] && !res[2]) {
             return;
