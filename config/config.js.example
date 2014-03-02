@@ -6,7 +6,7 @@
 var serverConf = {
         apiserver : 'http://' + pageConf.apiserver,
 }
-serverConf.apibase = apiserver + '/api/v0';
+serverConf.apibase = serverConf.apiserver + '/api/v0';
 // the place where the images are stored
 // must be whole url
 serverConf.imgbase = 'http://' + pageConf.staticserver +' /images/nodes/';
