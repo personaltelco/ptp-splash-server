@@ -28,8 +28,7 @@ $(document).ready(
                 });
             }
         
-            async.parallel([ internetWorks, 
-                             loadDonors, 
+            async.parallel([ loadDonors, 
                              loadAboutVideo,
                              loadAboutNodes, 
                              loadMailinglist, 
@@ -37,19 +36,7 @@ $(document).ready(
                              finished);
         });
 
-function internetWorks(cb) {
-    console.log('internet works');
-    $("#works").text("Dynamic content successfully loaded from " + apiserver);
-    $("#works").removeClass('text-danger');
-    $("#statusSidebarWords").text("connected");
-    $("#statusSidebarWords").removeClass('text-danger')
-            .addClass('text-success');
-    $("#statusSidebarIcons").html('<i class="fa fa-sitemap text-success"></i>');
-    // tempting to load some overall network stats
-    // number of nodes active
-    // number of connected users
-    cb();
-}
+
 
 function loadAboutVideo(done) {
     console.log('about video');

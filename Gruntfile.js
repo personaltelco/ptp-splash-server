@@ -13,6 +13,7 @@ module.exports = function(grunt) {
                     './node_modules/dustjs-linkedin/dist/dust-full.min.js',
                     './node_modules/async/lib/async.js',
                     './src/dustjs/compiled/*.js',
+                    './config/config.js',
                     './src/*.js'
                 ],
                 dest: './htdocs/js/<%= pkg.name %>.min.js'
