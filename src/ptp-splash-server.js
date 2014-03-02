@@ -1,9 +1,9 @@
 // development convenience to be able to pass
-// ?nodeName=PotatoChampion
+// ?node=PotatoChampion
 // for example in order to test how it looks with different nodes
 var params = getParams();
-if (params.nodeName) {
-    pageConf.nodeName = params.nodeName;
+if (params.node) {
+    pageConf.node = params.node;
 }
 
 $(document).ready(
@@ -13,9 +13,9 @@ $(document).ready(
 //                $('.PTP_LOGO').attr('src', imgbase + res.data.logo);
 //            });
             // change out all the PTP vars for demo
-            if (params.nodeName) {
+            if (params.node) {
                 console.log('changing out the node info');
-                $.getJSON(apibase + '/nodes/' + pageConf.nodeName , function(res) {
+                $.getJSON(apibase + '/nodes/' + pageConf.node , function(res) {
                     var keys = Object.keys(res.data);
                     $('.PTP_LOGO').attr('src', imgbase + res.data.logo);
                     for (var i = 0; i < keys.length; i++) {
@@ -75,7 +75,7 @@ function loadAboutNodes(done) {
     $.getJSON(apibase + '/nodes', function(res) {
         // get all the nodes that have logos
         async.filter(res.data, function(n, cb) {
-            var nn = Object.keys(n)[0]; // the key is the nodename
+            var nn = Object.keys(n)[0]; // the key is the node
             console.log('logo', n[nn].logo);
             cb((n && n[nn].logo));
         }, function(list) {
@@ -85,7 +85,7 @@ function loadAboutNodes(done) {
                 var obj = {
                     n : nodeinfo[nname],
                     base : imgbase,
-                    nodename: nname
+                    node: nname
                 };
                 dust.render("about_nodes", obj, function(err, rendered) {
                     // console.log(url, template);
@@ -126,9 +126,9 @@ function loadNews(done) {
     async.parallel([ function(cb) {
         getAndRender(apibase + '/twitter/ptp', 'tweet', cb);
     }, function(cb) {
-        getAndRender(apibase + '/twitter/' + pageConf.nodeName, 'tweet', cb);
+        getAndRender(apibase + '/twitter/' + pageConf.node, 'tweet', cb);
     }, function(cb) {
-        getAndRender(apibase + '/rss/' + pageConf.nodeName, 'rss', cb);
+        getAndRender(apibase + '/rss/' + pageConf.node, 'rss', cb);
     } ], function(err, res) {
         if (!res[0] && !res[1] && !res[2]) {
             return;
