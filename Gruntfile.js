@@ -22,7 +22,6 @@ module.exports = function(grunt) {
         cssmin : {
             add_banner : {
                 options : {
-                    report: "gzip",
                     banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd hh:MM") %> */\n',
                 },
                 files : {
