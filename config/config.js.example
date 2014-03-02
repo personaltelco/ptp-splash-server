@@ -1,13 +1,13 @@
-// pageConf is set in splash.html in ptp-splash-page repo
-// https://github.com/personaltelco/ptp-splash-page
-// it is meant to be the place for handoff of information to this js
-var nodeName = pageConf.nodeName;
-
 // these must correspond to the server for ptp-api
 // https://github.com/personaltelco/ptp-api
-var apiserver = 'http://api.personaltelco.net';
-var apibase = apiserver + '/api/v0';
 
+// pageConf is set by splash.html in ptp-splash-page
+
+var serverConf = {
+        apiserver : 'http://' + pageConf.apiserver,
+}
+serverConf.apibase = apiserver + '/api/v0';
 // the place where the images are stored
 // must be whole url
-var imgbase = "http://static.personaltelco.net/images/nodes/";
+serverConf.imgbase = 'http://' + pageConf.staticserver +' /images/nodes/';
+
