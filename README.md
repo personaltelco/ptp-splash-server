@@ -33,8 +33,8 @@ before you do anything
 ````bash
     cp ./src/ptp-splash-server-config.js.example ./src/ptp-splash-server-config.js
 ````
-The config.js file as provided in the example uses a handoff of variable from `pageConf` which are set in the browser
-by files in the ptp-splash-page repository.  You probably don't need to change it at all.
+The config.js file as provided in the example uses a handoff of configuration via a hash named `pageConf` which is set in the browser
+(see [ptp-splash-page](https://github.com/personaltelco/ptp-splash-page)).  You probably don't need to change it at all.
 
 then call
 
@@ -54,13 +54,13 @@ templates in ./src/dust and then run
 
 Which will call `grunt`, a nodejs build tool.  grunt is configured by Gruntfile.js
 to exec build commands including `dustc` (dust compiler) to turn those templates into
-javascript.  Uglify is then called to combine and minify all the 
-javascript (as configured in Gruntfile.js) and spits out
+javascript.  `uglify` and `cssmin` is then called to each combine and minify all the 
+javascript and css respectively (as configured in Gruntfile.js) and spits out
  
 ``````
     ./htdocs/js/ptp-splash-server.min.js
     ./htdocs/css/ptp-splash-server.min.css
 ``````
 
-which is what gets called by the HTML in the browser (served from the router) which resides in the repo `ptp-splash-page`
+which is what gets called by the HTML in the browser (served from the router) which resides in the repo [ptp-splash-page](https://github.com/personaltelco/ptp-splash-page)
 
