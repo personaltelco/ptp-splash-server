@@ -5,18 +5,19 @@ Benjamin Foote
 2014-02-21  
 ben@bnf.net  
 
-The Splash page (ptp-splash-page) is backed by some static files from a server
+The [PTP Splash page](https://github.com/personaltelco/ptp-splash-page) is backed by some static files from a server
 
-The static files (mostly javascript) are built from the src directory using nodejs.
+The static files (mostly javascript) are built from js in the src directory using nodejs.
 
 ## install
 
-depends on nodejs
+depends on a recent nodejs and npm
 
 first, clone the repo
 
 ````bash
     git clone git@github.com:personaltelco/ptp-splash-server.git
+    cd ptp-splash-server
 ````
 
 then run 
@@ -32,7 +33,8 @@ before you do anything
 ````bash
     cp ./src/ptp-splash-server-config.js.example ./src/ptp-splash-server-config.js
 ````
-and then edit that file
+The config.js file as provided in the example uses a handoff of variable from `pageConf` which are set in the browser
+by files in the ptp-splash-page repository.  You probably don't need to change it at all.
 
 then call
 
@@ -40,24 +42,25 @@ then call
     make
 ````
 
-## editing the js and dynamin html that gets delivered to the browser
+## editing the js and dynamic html that gets delivered to the browser
 
 If you're looking to make edits to some of the splashpage sections
 that get loaded you'll want to edit the [dustjs](http://linkedin.github.io/dustjs/) (handlebars style)
-templates in ./src/dustjs and then run
+templates in ./src/dust and then run
 
 ````bash
     make
 ````
 
-Which will call grunt, a nodejs build tool.  grunt is configured by Gruntfile.js
-to exec build commnands including 'dustc' (dust compiler) to turn those templates into
+Which will call `grunt`, a nodejs build tool.  grunt is configured by Gruntfile.js
+to exec build commands including `dustc` (dust compiler) to turn those templates into
 javascript.  Uglify is then called to combine and minify all the 
 javascript (as configured in Gruntfile.js) and spits out
  
+``````
     ./htdocs/js/ptp-splash-server.min.js
     ./htdocs/css/ptp-splash-server.min.css
+``````
 
-
-which is what gets called by the browser.
+which is what gets called by the HTML in the browser (served from the router) which resides in the repo `ptp-splash-page`
 
