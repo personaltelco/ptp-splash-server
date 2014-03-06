@@ -5,7 +5,7 @@ Benjamin Foote
 2014-02-21  
 ben@bnf.net  
 
-As part of the [PTP SplashPage2014](https://github.com/personaltelco/ptp-splash-page) effort...
+As part of the [PTP SplashPage2014](https://personaltelco.net/wiki/SplashPage2014) effort...
 
 The [PTP Splash page](https://github.com/personaltelco/ptp-splash-page) is backed by some static files from a server
 
