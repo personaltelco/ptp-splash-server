@@ -31,7 +31,7 @@ then run
 before you do anything
 
 ````bash
-    cp ./src/ptp-splash-server-config.js.example ./src/ptp-splash-server-config.js
+    cp ./config/config.js.example ./config/config.js
 ````
 The config.js file as provided in the example uses a handoff of configuration via a hash named `pageConf` which is set in the browser
 (see [ptp-splash-page](https://github.com/personaltelco/ptp-splash-page)).  You probably don't need to change it at all.
