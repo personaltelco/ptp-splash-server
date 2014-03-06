@@ -5,6 +5,8 @@ Benjamin Foote
 2014-02-21  
 ben@bnf.net  
 
+As part of the [PTP SplashPage2014](https://github.com/personaltelco/ptp-splash-page) effort...
+
 The [PTP Splash page](https://github.com/personaltelco/ptp-splash-page) is backed by some static files from a server
 
 The static files (mostly javascript) are built from js in the src directory using nodejs.
