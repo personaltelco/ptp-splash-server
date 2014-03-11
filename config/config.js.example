@@ -4,10 +4,10 @@
 // pageConf is set by splash.html in ptp-splash-page
 
 var serverConf = {
-        apiserver : 'http://' + pageConf.apiserver,
+    apiserver : pageConf.apiserver,
+    staticserver : pageConf.staticserver,
+    apibaseurl : pageConf.apibaseurl,
+    staticbaseurl : pageConf.staticbaseurl
 }
-serverConf.apibase = serverConf.apiserver + '/api/v0';
 // the place where the images are stored
-// must be whole url
-serverConf.imgbase = 'http://' + pageConf.staticserver + '/images/nodes/';
-
+serverConf.imgbase = serverConf.staticbaseurl + '/images/nodes/';

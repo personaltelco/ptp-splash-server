@@ -13,7 +13,7 @@ $(document).ready(
             // change out all the PTP vars for demo
             if (params.node) {
                 console.log('changing out the node info');
-                $.getJSON(serverConf.apibase + '/nodes/' + pageConf.node , function(res) {
+                $.getJSON(serverConf.apibaseurl + '/nodes/' + pageConf.node , function(res) {
                     var keys = Object.keys(res.data);
                     // a couple special cases
                     pageConf.nodeName = res.data.nodename;
@@ -51,14 +51,14 @@ function loadAboutVideo(done) {
 }
 
 function loadMailinglist(cb) {
-    getAndRender(serverConf.apibase + '/rss/ptp', 'rss', function(err, ret) {
+    getAndRender(serverConf.apibaseurl + '/rss/ptp', 'rss', function(err, ret) {
         $('<h2>From the mailing list...</h2>' + ret).appendTo("#ptprss");
         cb();
     });
 }
 
 function loadDonors(cb) {
-    $.getJSON(serverConf.apibase + '/donors', function(res) {
+    $.getJSON(serverConf.apibaseurl + '/donors', function(res) {
         $('#donors').append(
                 '<h2 class="featurette-heading">Thank You to Our Donors</h2>');
         res.data
@@ -73,7 +73,7 @@ function loadDonors(cb) {
 
 function loadAboutNodes(done) {
     console.log('about nodes');
-    $.getJSON(serverConf.apibase + '/nodes', function(res) {
+    $.getJSON(serverConf.apibaseurl + '/nodes', function(res) {
         // get all the nodes that have logos
         async.filter(res.data, function(n, cb) {
             var nn = Object.keys(n)[0]; // the key is the node
@@ -125,11 +125,11 @@ function aboutNode() {
 function loadNews(done) {
     console.log('loading news');
     async.parallel([ function(cb) {
-        getAndRender(serverConf.apibase + '/twitter/ptp', 'tweet', cb);
+        getAndRender(serverConf.apibaseurl + '/twitter/ptp', 'tweet', cb);
     }, function(cb) {
-        getAndRender(serverConf.apibase + '/twitter/' + pageConf.node, 'tweet', cb);
+        getAndRender(serverConf.apibaseurl + '/twitter/' + pageConf.node, 'tweet', cb);
     }, function(cb) {
-        getAndRender(serverConf.apibase + '/rss/' + pageConf.node, 'rss', cb);
+        getAndRender(serverConf.apibaseurl + '/rss/' + pageConf.node, 'rss', cb);
     } ], function(err, res) {
         if (!res[0] && !res[1] && !res[2]) {
             return;
