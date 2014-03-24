@@ -200,27 +200,31 @@ function addNav(target, nav) {
 // but due to the compresssion / mangling of function names on the router
 // you can't count on those function names being valid.
 // we could probably get away with NOT compressing the splash page
+var further = 50;
 function smoothScrolling() {
-    $("a[href^='#']").unbind( "click" ); // get rid of the existing click event
-    $("a[href^='#']").on('click', function(e) {
-
-        // prevent default anchor click behavior
-        e.preventDefault();
-
+    // a bootstrap feature which needs resetting after any manipulation of the DOM
+    $("a[href^='#']").each(function() {
         // store hash
         var hash = this.hash;
-        var further = 0;
+        console.log('hash: ' + hash);
         if (hash == '#home' || hash == '#Carousel') {
-            further = 50;
+
+        } else {
+            $(this).unbind( "click" ); // get rid of the existing click event
+            // animate
+            $("a[href^='#']").on('click', function(e) {
+                
+                // prevent default anchor click behavior
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop : $(this.hash).offset().top - further
+                }, 1250, function() {
+                    // when done, add hash to url
+                    // (default click behaviour)
+                    window.location.hash = hash;
+                });
+            });
         }
-        // animate
-        $('html, body').animate({
-            scrollTop : $(this.hash).offset().top - further
-        }, 1250, function() {
-            // when done, add hash to url
-            // (default click behaviour)
-            window.location.hash = hash;
-        });
 
     });
 }
