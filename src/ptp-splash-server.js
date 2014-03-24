@@ -191,7 +191,7 @@ function getAndRender(url, template, cb) {
 }
 
 function addNav(target, nav) {
-    $('#navs').append('<li><a href="#' + target + '">' + nav + '</a></li>');
+    $('#navs').append('<li><a href="#' + target + '" class="internallink">' + nav + '</a></li>');
     smoothScrolling();
     $('body').scrollspy('refresh');
 }
