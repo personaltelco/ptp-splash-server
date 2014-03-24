@@ -201,6 +201,7 @@ function addNav(target, nav) {
 // you can't count on those function names being valid.
 // we could probably get away with NOT compressing the splash page
 function smoothScrolling() {
+    $("a[href^='#']").unbind( "click" ); // get rid of the existing click event
     $("a[href^='#']").on('click', function(e) {
 
         // prevent default anchor click behavior
