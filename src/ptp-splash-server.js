@@ -33,7 +33,8 @@ $(document).ready(
                              loadAboutVideo,
                              loadAboutNodes, 
                              loadMailinglist, 
-                             loadNews ], 
+                             loadNews,
+                             loadEvent ],
                              finished);
         });
 
@@ -161,6 +162,60 @@ function loadNews(done) {
             addNav('news', 'News');
             done();
         });
+    });
+}
+
+function loadEvent(done) {
+    $.getJSON(serverConf.apibaseurl + '/events?status=current', function(res) {
+        if (!res || res.type === 'error' || res.data.length === 0) {
+            return done();
+        }
+
+        // We'll just use the imminently upcoming event.
+        var event = res.data[0];
+
+        dust.render('event', event, function(err, rendered) {
+            switch (event.splash && event.splash.position) {
+            case 'top':
+                $(rendered).insertBefore($('#Carousel'));
+                break;
+            case 'default':
+            default:
+                $(rendered).insertAfter($('#Carousel'));
+                break;
+            }
+        });
+
+        if (event.action && event.action.url) {
+            var text = event.action.text || 'Learn more about ' + event.name;
+
+            var action = $('<div class="radio ptp-event-action-highlight"></div>');
+            var label = $('<label></label>').appendTo(action);
+
+            var input = $('<input type="radio" name="redirect" id="optionsRadiosEvent"></input>')
+                .attr('value', event.action.url)
+                .appendTo(label);
+            $('<span></span>')
+                .text(text)
+                .appendTo(label);
+
+            var fieldset = $('#tos form fieldset');
+
+            function prioritize() {
+                fieldset.find('[name="redirect"]:checked').prop('checked', false);
+                input.prop('checked', true);
+            }
+
+            if (event.action.priority) {
+                prioritize();
+            }
+
+            $('#event-action-button').click(prioritize);
+
+            fieldset.prepend(action);
+        }
+
+        done();
     });
 }
 
