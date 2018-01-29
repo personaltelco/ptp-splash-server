@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 			options: {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd hh:MM") %> */\n',
                 mangle: false,
-                compress: true,
+                compress: {},
                 beautify: false
 			},
 			build: {
@@ -46,6 +46,9 @@ module.exports = function(grunt) {
             dust_about_nodes: {
                 cmd: "./node_modules/.bin/dustc --name=about_nodes ./src/dust/about_nodes.dust.html ./src/dust/compiled/_dust_about_nodes.js"
             },
+            dust_event: {
+                cmd: "./node_modules/.bin/dustc --name=event ./src/dust/event.dust.html ./src/dust/compiled/_dust_event.js"
+            },
         },
         watch: {
             scripts: {
@@ -69,7 +72,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('dust', ['exec:dust_news', 'exec:dust_tweet', 'exec:dust_rss', 'exec:dust_about_video', 'exec:dust_about_nodes']);
+    grunt.registerTask('dust', ['exec:dust_news', 'exec:dust_tweet', 'exec:dust_rss', 'exec:dust_about_video', 'exec:dust_about_nodes', 'exec:dust_event']);
     // Default task(s) that run if you just type 'grunt'
     grunt.registerTask('default', ['dust','uglify','cssmin']);
 

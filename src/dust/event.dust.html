@@ -1,0 +1,26 @@
+<div id="event-container">
+    <div class="container">
+        <div class="row">
+            {#image}
+            <div class="col-md-8">
+            {:else}
+            <div class="col-md-12">
+            {/image}
+                <h2>{name}</h2>
+                <div>
+                    {description|s}
+                </div>
+                {#action.url}
+                    <p>
+                        <a id="event-action-button" class="btn btn-lg btn-danger internallink" href="#tos">I'm Interested!</a>
+                    </p>
+                {/action.url}
+            </div>
+            {#image}
+            <div class="col-md-4">
+                <img class="responsive-image" src="{.}" alt="{name}">
+            </div>
+            {/image}
+        </div>
+    </div>
+</div>
